@@ -14,14 +14,11 @@ class SentryExampleFrontendError extends Error {
 export default function Page() {
   const [hasSentError, setHasSentError] = useState(false);
   const [isConnected, setIsConnected] = useState(true);
-  
+
   useEffect(() => {
-    async function checkConnectivity() {
-      const result = await Sentry.diagnoseSdkConnectivity();
-      setIsConnected(result !== 'sentry-unreachable');
-    }
-    checkConnectivity();
+    Sentry.captureMessage("Connectivity test message");
   }, []);
+
 
   return (
     <div>
